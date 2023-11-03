@@ -1,0 +1,13 @@
+---
+# here beakler will wuse vagrant as a hypervisor to provision a vm from the box 
+HOSTS:
+  debain-8-x64:
+    # you better at least add the below roles to any node
+    roles:
+      - agent
+      - default
+    platform: debain-8-amd64
+    hypervisor: vagrant
+    box: puppetlabs.debian-8.2-64-nocm
+CONFIG:
+  type: foss
