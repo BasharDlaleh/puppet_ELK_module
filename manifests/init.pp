@@ -11,7 +11,7 @@ class elk {
     source => 'puppet:///modules/elk/beats.conf',
   }
 
-  include java
+  include ::java
   class { 'elasticsearch':
     jvm_options => ['-Xms256m','-Xmx256m']  
   }
