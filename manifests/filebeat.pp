@@ -33,5 +33,14 @@ class elk::filebeat (
     enable  => true,
     require => Package['filebeat'],
   }
+  # configure filebeat service to send logs to logstash
+  file{'/etc/filebeat/filebeat.yml':
+    ensure => file,
+    content => epp('elk/filebeat.yml.epp',{
+      prospectors     => $prospectors,
+      logstash_server => $logstash_server,
+      logstash_port   => $logstash_port,
+      })
+    }
   
 }

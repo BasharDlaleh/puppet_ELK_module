@@ -1,0 +1,16 @@
+# note that for adding epp template conditions or loops we use <% -%> but for values we use <%= %>
+<% if $prospectors { -%>
+filebeat.prospectors:
+<% $prospectors.each |$p| { -%>
+- type: <%= $p['type'] %>
+  enabled: true
+  paths:
+  <% $p['paths'].each |$path| { -%>
+    - <%= $path %>
+  <% } -%>
+  json.keys_under_root: <%= $p['json_keys_under_root'] %>
+<% } -%>
+<% } -%>
+
+output.logstash:
+  hosts:["<%= $logstash_server %>:<%= $logstash_port %>"]

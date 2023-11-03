@@ -22,5 +22,5 @@ class elk {
     }
   }
 
-  #include elk::filebeat
+  include elk::filebeat
 }
