@@ -21,22 +21,17 @@ class elk::filebeat (
   $logstash_server = '127.0.0.1',
   $logstash_port   = '5044',
 ){
+  # this will include the elastic_stack repo in the server's apt repositories, has nothing to do with the git repos
   include elastic_stack::repo
-
+  # install filebeat package
   package{'filebeat':
     ensure => present,
   }
+  # run filebeat service
   service{'filebeat':
     ensure  => running,
     enable  => true,
     require => Package['filebeat'],
   }
-  file{'/etc/filebeat/filebeat.yml':
-    ensure => file,
-    content => epp('elk/filebeat.yml.epp',{
-      prospectors     => $prospectors,
-      logstash_server => $logstash_server,
-      logstash_port   => $logstash_port,
-      })
-    }
+  
 }
