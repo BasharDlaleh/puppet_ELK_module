@@ -1,4 +1,3 @@
-# note that for adding epp template conditions or loops we use <% -%> but for values we use <%= %>
 <% if $prospectors { -%>
 filebeat.prospectors:
 <% $prospectors.each |$p| { -%>
